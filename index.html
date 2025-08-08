@@ -7,18 +7,6 @@
   <meta name="description" content="Biblioteca de imagens públicas da Igreja Oliveira publicada via GitHub Pages" />
   <style>
     :root {
-      /* LIGHT (default) */
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --muted: #64748b;
-      --text: #0f172a;
-      --border: #e2e8f0;
-      --primary: #2563eb;
-      --primary-contrast: #ffffff;
-      --accent: #7c3aed;
-      --shadow: 0 8px 24px rgba(2,6,23,.08);
-    }
-    [data-theme="dark"] {
       --bg: #0b1220;
       --surface: #0f172a;
       --muted: #94a3b8;
@@ -27,27 +15,27 @@
       --primary: #60a5fa;
       --primary-contrast: #0b1220;
       --accent: #a78bfa;
+      --success: #34d399;
+      --danger: #f87171;
       --shadow: 0 10px 30px rgba(2,6,23,.35);
     }
-    @media (prefers-color-scheme: dark) {
-      :root { color-scheme: dark; }
-      :root:not([data-theme]) { /* se não houver preferencia salva, siga o sistema */
-        --bg: #0b1220; --surface: #0f172a; --muted:#94a3b8; --text:#e2e8f0; --border:#1f2a44; --primary:#60a5fa; --primary-contrast:#0b1220; --accent:#a78bfa; --shadow: 0 10px 30px rgba(2,6,23,.35);
-      }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f7fafc; --surface:#ffffff; --muted:#64748b; --text:#0f172a; --border:#e2e8f0; --primary:#2563eb; --primary-contrast:#ffffff; --accent:#7c3aed; --shadow: 0 8px 24px rgba(2,6,23,.08); }
     }
+    [data-theme="light"] { --bg:#f7fafc; --surface:#ffffff; --muted:#64748b; --text:#0f172a; --border:#e2e8f0; --primary:#2563eb; --primary-contrast:#ffffff; --accent:#7c3aed; --shadow: 0 8px 24px rgba(2,6,23,.08); }
 
     html, body { height: 100%; }
     body {
       margin: 0; background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.12), transparent 60%),
-        radial-gradient(900px 500px at 110% 10%, rgba(167,139,250,.10), transparent 60%),
+        radial-gradient(1400px 700px at -10% -20%, rgba(96,165,250,.16), transparent 60%),
+        radial-gradient(1100px 600px at 110% 0%, rgba(167,139,250,.14), transparent 60%),
         var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height: 1.5;
+      line-height: 1.55;
       transition: background-color .25s ease, color .25s ease;
     }
-    .container { max-width: 1120px; margin: 0 auto; padding: 28px 20px 60px; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 28px 20px 64px; }
 
     .hero { position: relative; padding: 28px; border: 1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)), var(--surface); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
     .hero:before { content: ""; position: absolute; inset: -1px; background: radial-gradient(600px 160px at 0% -10%, rgba(96,165,250,.12), transparent 60%), radial-gradient(600px 160px at 100% -20%, rgba(167,139,250,.10), transparent 60%); pointer-events: none; }
@@ -72,13 +60,19 @@
     .input, select.input { flex:1; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,.02); color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
     .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-    .item { display:flex; flex-direction:column; gap:10px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); }
+    .item { display:flex; flex-direction:column; gap:10px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); transition: transform .12s ease, box-shadow .2s ease; }
+    .item:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(2,6,23,.22); }
     .thumb { display:block; width:100%; max-height:180px; object-fit: contain; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px dashed var(--border); padding: 8px; }
     .muted { color: var(--muted); }
 
     .item .row .btn { flex: 0 0 auto }
     .toast { position: fixed; right: 20px; bottom: 20px; padding: 10px 14px; border-radius: 12px; border:1px solid var(--border); background: var(--surface); color: var(--text); box-shadow: var(--shadow); opacity: 0; transform: translateY(10px); transition: .25s ease; }
     .toast.show { opacity: 1; transform: translateY(0); }
+
+    .empty { display:flex; align-items:center; gap:12px; padding: 14px; border:1px dashed var(--border); border-radius: 12px; background: rgba(255,255,255,.02); }
+    .skeleton { position: relative; overflow: hidden; background: rgba(255,255,255,.06); }
+    .skeleton:after { content:""; position:absolute; inset:0; transform: translateX(-100%); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.15), rgba(255,255,255,0)); animation: shimmer 1.5s infinite; }
+    @keyframes shimmer { 100% { transform: translateX(100%); } }
 
     footer { margin-top: 38px; padding: 16px; text-align:center; color: var(--muted); }
   </style>
@@ -118,6 +112,7 @@
           <a id="openUrl" class="btn" target="_blank" rel="noopener">Abrir</a>
           <button id="copyUrl" class="btn" type="button">Copiar</button>
           <button id="copyImgTag" class="btn" type="button" title="Copiar tag &lt;img&gt;">Copiar &lt;img/&gt;</button>
+          <button id="refresh" class="btn" type="button" title="Recarregar lista">Recarregar</button>
         </div>
       </div>
       <p class="muted" style="margin:8px 2px">Dica: nomes são case-sensitive. Veja a seção Logos para exemplos válidos.</p>
@@ -125,13 +120,20 @@
 
     <section class="section" id="logos">
       <h2>Logos</h2>
-      <div class="grid" id="logosGrid"></div>
+      <div class="grid" id="logosGrid">
+        <div class="item skeleton" style="height:220px"></div>
+        <div class="item skeleton" style="height:220px"></div>
+        <div class="item skeleton" style="height:220px"></div>
+      </div>
     </section>
 
     <section class="section" id="email">
       <h2>Email / Social Icons</h2>
-      <div id="emailGrid" class="grid"></div>
-      <p id="emailEmpty" class="muted" style="display:none; border:1px dashed var(--border); padding:10px; border-radius:10px">Nenhuma imagem encontrada ainda em <code>assets/images/email/social-icons</code>.</p>
+      <div id="emailGrid" class="grid">
+        <div class="item skeleton" style="height:180px"></div>
+        <div class="item skeleton" style="height:180px"></div>
+      </div>
+      <div id="emailEmpty" class="empty" style="display:none">Nenhuma imagem encontrada ainda em <code>assets/images/email/social-icons</code>. Publique arquivos e recarregue.</div>
     </section>
 
     <footer>
@@ -144,9 +146,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const BASE = 'https://jonh-dev.github.io/igreja-oliveira-assets';
+      const API_BASE = 'https://api.github.com/repos/jonh-dev/igreja-oliveira-assets/contents/';
+      const TTL_MS = 5 * 60 * 1000; // 5min cache
 
-      const logos = [ 'logo-no-background.png', 'logo-withe-no-background.png' ];
-      const emailIcons = [ /* ex.: 'instagram.svg', 'youtube.svg' */ ];
+      const state = { logos: [], email: [] };
 
       function pathToPublicUrl(path) { return `${BASE}/${path}`.replace(/\\/g, '/'); }
 
@@ -195,6 +198,40 @@
         files.forEach(file => grid.appendChild(createItem(`${baseFolder}/${file}`)));
       }
 
+      function cacheGet(key) {
+        try { const raw = localStorage.getItem(key); if (!raw) return null; const { ts, data } = JSON.parse(raw); if (Date.now() - ts < TTL_MS) return data; } catch(_) {}
+        return null;
+      }
+      function cacheSet(key, data) { try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data })); } catch(_) {} }
+
+      async function listFiles(subdir) {
+        const key = `cache_${subdir}`;
+        const cached = cacheGet(key);
+        if (cached) return cached;
+        const res = await fetch(`${API_BASE}${subdir}`);
+        if (!res.ok) throw new Error('Falha ao listar ' + subdir);
+        const json = await res.json();
+        const files = (json || []).filter(x => x.type === 'file' && x.name !== '.gitkeep').map(x => x.name);
+        cacheSet(key, files);
+        return files;
+      }
+
+      async function bootstrap() {
+        try {
+          state.logos = await listFiles('assets/images/logos');
+        } catch (e) {
+          console.warn(e); state.logos = ['logo-no-background.png', 'logo-withe-no-background.png'];
+          showToast('Listagem limitada (API). Usando fallback.');
+        }
+        try {
+          state.email = await listFiles('assets/images/email/social-icons');
+        } catch (e) {
+          console.warn(e); state.email = []; // sem fallback por enquanto
+        }
+        renderSection('logosGrid', null, state.logos, 'assets/images/logos');
+        renderSection('emailGrid', 'emailEmpty', state.email, 'assets/images/email/social-icons');
+      }
+
       function updateUrl() {
         const folder = document.getElementById('folder').value;
         const filename = (document.getElementById('filename').value || '').trim();
@@ -218,7 +255,7 @@
           theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
         if (theme === 'dark') document.documentElement.setAttribute('data-theme','dark');
-        else document.documentElement.removeAttribute('data-theme');
+        else document.documentElement.setAttribute('data-theme','light');
         applyThemeLabel(theme);
       }
 
@@ -226,7 +263,7 @@
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const next = isDark ? 'light' : 'dark';
         if (next === 'dark') { document.documentElement.setAttribute('data-theme','dark'); }
-        else { document.documentElement.removeAttribute('data-theme'); }
+        else { document.documentElement.setAttribute('data-theme','light'); }
         localStorage.setItem('theme', next);
         applyThemeLabel(next);
       };
@@ -234,10 +271,11 @@
       document.getElementById('copyUrl').onclick = async () => { if (!document.getElementById('resultUrl').value) updateUrl(); try { await navigator.clipboard.writeText(document.getElementById('resultUrl').value); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
       document.getElementById('openUrl').onclick = () => { if (!document.getElementById('resultUrl').value) updateUrl(); };
       document.getElementById('filename').addEventListener('keydown', (e) => { if (e.key === 'Enter') updateUrl(); });
-      document.getElementById('build').onclick = updateUrl;
+      document.getElementById('refresh').onclick = () => { ['assets/images/logos','assets/images/email/social-icons'].forEach(k => localStorage.removeItem('cache_'+k)); bootstrap(); };
+      document.getElementById('copyImgTag').onclick = () => updateUrl();
+      document.getElementById('folder').addEventListener('change', updateUrl);
 
-      renderSection('logosGrid', null, logos, 'assets/images/logos');
-      renderSection('emailGrid', 'emailEmpty', emailIcons, 'assets/images/email/social-icons');
+      bootstrap();
       initTheme();
     });
   </script>
