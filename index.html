@@ -7,137 +7,451 @@
   <meta name="description" content="Biblioteca de imagens públicas da Igreja Oliveira publicada via GitHub Pages" />
   <style>
     :root {
-      --bg: #0b1220;
-      --surface: #0f172a;
+      --bg: #0a0e1a;
+      --surface: #0f1629;
+      --surface-hover: #162033;
       --muted: #94a3b8;
-      --text: #e2e8f0;
-      --border: #1f2a44;
-      --primary: #60a5fa;
-      --primary-contrast: #0b1220;
-      --accent: #a78bfa;
-      --success: #34d399;
-      --danger: #f87171;
-      --shadow: 0 10px 30px rgba(2,6,23,.35);
+      --text: #f1f5f9;
+      --text-bright: #ffffff;
+      --border: #1e293b;
+      --border-bright: #334155;
+      --primary: #3b82f6;
+      --primary-bright: #60a5fa;
+      --primary-contrast: #0f1629;
+      --accent: #8b5cf6;
+      --accent-bright: #a78bfa;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --shadow: 0 20px 40px rgba(0,0,0,.5);
+      --shadow-lg: 0 25px 50px rgba(0,0,0,.6);
+      --gradient-primary: linear-gradient(135deg, var(--primary), var(--accent));
+      --gradient-surface: linear-gradient(145deg, rgba(255,255,255,.02), rgba(255,255,255,.001));
     }
     @media (prefers-color-scheme: light) {
-      :root { --bg:#f7fafc; --surface:#ffffff; --muted:#64748b; --text:#0f172a; --border:#e2e8f0; --primary:#2563eb; --primary-contrast:#ffffff; --accent:#7c3aed; --shadow: 0 8px 24px rgba(2,6,23,.08); }
+      :root { 
+        --bg: #f8fafc; --surface: #ffffff; --surface-hover: #f1f5f9; --muted: #64748b; --text: #1e293b; --text-bright: #0f172a; --border: #e2e8f0; --border-bright: #cbd5e1; --primary: #2563eb; --primary-bright: #3b82f6; --primary-contrast: #ffffff; --accent: #7c3aed; --accent-bright: #8b5cf6; --shadow: 0 10px 25px rgba(0,0,0,.08); --shadow-lg: 0 20px 40px rgba(0,0,0,.12); --gradient-surface: linear-gradient(145deg, rgba(255,255,255,1), rgba(248,250,252,1));
+      }
     }
-    [data-theme="light"] { --bg:#f7fafc; --surface:#ffffff; --muted:#64748b; --text:#0f172a; --border:#e2e8f0; --primary:#2563eb; --primary-contrast:#ffffff; --accent:#7c3aed; --shadow: 0 8px 24px rgba(2,6,23,.08); }
+    [data-theme="light"] { 
+      --bg: #f8fafc; --surface: #ffffff; --surface-hover: #f1f5f9; --muted: #64748b; --text: #1e293b; --text-bright: #0f172a; --border: #e2e8f0; --border-bright: #cbd5e1; --primary: #2563eb; --primary-bright: #3b82f6; --primary-contrast: #ffffff; --accent: #7c3aed; --accent-bright: #8b5cf6; --shadow: 0 10px 25px rgba(0,0,0,.08); --shadow-lg: 0 20px 40px rgba(0,0,0,.12); --gradient-surface: linear-gradient(145deg, rgba(255,255,255,1), rgba(248,250,252,1));
+    }
 
+    * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
-      margin: 0; background:
-        radial-gradient(1400px 700px at -10% -20%, rgba(96,165,250,.16), transparent 60%),
-        radial-gradient(1100px 600px at 110% 0%, rgba(167,139,250,.14), transparent 60%),
+      margin: 0; 
+      background: 
+        radial-gradient(ellipse 1200px 600px at -200px -100px, rgba(59,130,246,.15), transparent),
+        radial-gradient(ellipse 1000px 500px at calc(100% + 200px) -50px, rgba(139,92,246,.12), transparent),
+        radial-gradient(ellipse 800px 400px at 50% 100%, rgba(16,185,129,.08), transparent),
         var(--bg);
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height: 1.55;
-      transition: background-color .25s ease, color .25s ease;
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.6;
+      font-weight: 400;
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    .container { max-width: 1120px; margin: 0 auto; padding: 28px 20px 64px; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 32px 24px 80px; }
 
-    .hero { position: relative; padding: 28px; border: 1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)), var(--surface); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
-    .hero:before { content: ""; position: absolute; inset: -1px; background: radial-gradient(600px 160px at 0% -10%, rgba(96,165,250,.12), transparent 60%), radial-gradient(600px 160px at 100% -20%, rgba(167,139,250,.10), transparent 60%); pointer-events: none; }
-    .hero h1 { margin: 0; letter-spacing: -0.02em; font-weight: 750; font-size: clamp(26px, 2.8vw, 40px); }
-    .hero p { margin: 8px 0 0; color: var(--muted); }
+    .hero { 
+      position: relative; 
+      padding: 40px 32px; 
+      border: 1px solid var(--border-bright); 
+      background: var(--gradient-surface), var(--surface); 
+      border-radius: 24px; 
+      box-shadow: var(--shadow-lg); 
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+    .hero::before { 
+      content: ""; 
+      position: absolute; 
+      inset: -2px; 
+      background: var(--gradient-primary);
+      border-radius: 26px;
+      z-index: -1;
+      opacity: 0.1;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+    }
+    .hero-header { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+    .hero-content { flex: 1; min-width: 300px; }
+    .hero h1 { 
+      margin: 0 0 12px; 
+      letter-spacing: -0.025em; 
+      font-weight: 800; 
+      font-size: clamp(28px, 4vw, 48px); 
+      color: var(--text-bright);
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+    .hero p { margin: 0; color: var(--muted); font-size: 18px; font-weight: 500; }
 
-    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,.02); text-decoration: none; }
-    .chip:hover { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.15) inset; }
+    .actions { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+    .btn { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 8px; 
+      padding: 12px 20px; 
+      border-radius: 12px; 
+      border: 1px solid var(--border); 
+      background: var(--surface); 
+      color: var(--text); 
+      cursor: pointer; 
+      text-decoration: none; 
+      font-weight: 500;
+      transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    .btn:hover::before { opacity: 0.1; }
+    .btn:hover { 
+      border-color: var(--primary-bright); 
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59,130,246,.25);
+    }
+    .btn.primary { 
+      background: var(--gradient-primary); 
+      border-color: var(--primary-bright);
+      color: var(--primary-contrast);
+      font-weight: 600;
+    }
+    .btn.primary:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(59,130,246,.4);
+    }
 
-    .actions { display:flex; align-items:center; gap: 10px; margin-left:auto }
-    .btn { display:inline-flex; align-items:center; gap:8px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; text-decoration: none; }
-    .btn.primary { background: linear-gradient(180deg, rgba(96,165,250,.2), rgba(96,165,250,.05)); border-color: rgba(96,165,250,.35); }
-    .btn.primary:hover { filter: brightness(1.1); }
+    .toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .chip { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 8px; 
+      padding: 10px 16px; 
+      border-radius: 50px; 
+      border: 1px solid var(--border); 
+      color: var(--text); 
+      background: var(--surface); 
+      text-decoration: none;
+      font-weight: 500;
+      transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .chip:hover { 
+      border-color: var(--primary-bright); 
+      background: var(--surface-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59,130,246,.15);
+    }
 
-    .section { margin-top: 28px; }
-    h2 { margin: 0 0 12px; font-size: clamp(18px, 1.8vw, 24px); letter-spacing: -0.01em; }
-    .card { border: 1px solid var(--border); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+    .section { margin-top: 48px; }
+    .section-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    h2 { 
+      margin: 0; 
+      font-size: clamp(20px, 2.5vw, 32px); 
+      letter-spacing: -0.02em; 
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+    .card { 
+      border: 1px solid var(--border-bright); 
+      border-radius: 20px; 
+      background: var(--gradient-surface), var(--surface); 
+      box-shadow: var(--shadow); 
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
 
-    .generator { padding: 18px; display: grid; gap: 12px; grid-template-columns: 1fr; }
-    .row { display:flex; gap:10px; }
-    .input, select.input { flex:1; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,.02); color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .generator { padding: 32px; }
+    .generator-grid { display: grid; gap: 20px; }
+    .input-group { display: flex; flex-direction: column; gap: 8px; }
+    .input-label { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+    .row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
+    .input, select.input { 
+      flex: 1; 
+      min-width: 200px;
+      padding: 14px 16px; 
+      border-radius: 12px; 
+      border: 1px solid var(--border); 
+      background: var(--surface-hover); 
+      color: var(--text); 
+      font-family: ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      font-size: 14px;
+      transition: all .2s ease;
+    }
+    .input:focus, select.input:focus {
+      outline: none;
+      border-color: var(--primary-bright);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.1);
+    }
+    .input[readonly] { cursor: not-allowed; opacity: 0.8; }
 
-    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-    .item { display:flex; flex-direction:column; gap:10px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); transition: transform .12s ease, box-shadow .2s ease; }
-    .item:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(2,6,23,.22); }
-    .thumb { display:block; width:100%; max-height:180px; object-fit: contain; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px dashed var(--border); padding: 8px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .item { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 16px; 
+      padding: 20px; 
+      border: 1px solid var(--border); 
+      border-radius: 16px; 
+      background: var(--gradient-surface), var(--surface);
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    .item:hover::before { opacity: 0.03; }
+    .item:hover { 
+      transform: translateY(-4px); 
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-bright);
+    }
+    .thumb { 
+      display: block; 
+      width: 100%; 
+      height: 200px;
+      object-fit: contain; 
+      border-radius: 12px; 
+      background: var(--surface-hover); 
+      border: 2px dashed var(--border); 
+      padding: 16px;
+      transition: border-color .2s ease;
+    }
+    .item:hover .thumb { border-color: var(--border-bright); }
+    .item-title { 
+      margin: 0; 
+      font-size: 16px; 
+      font-weight: 600; 
+      color: var(--text-bright);
+      word-break: break-all;
+    }
+    .item-actions { display: flex; flex-direction: column; gap: 12px; }
+    .item-url { 
+      padding: 12px; 
+      border-radius: 8px; 
+      background: var(--surface-hover); 
+      border: 1px solid var(--border);
+      font-family: ui-monospace, 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      color: var(--muted);
+      word-break: break-all;
+      line-height: 1.4;
+    }
+    .item .row { margin-top: 8px; }
+    .item .row .btn { flex: 1; min-width: 0; font-size: 13px; padding: 8px 12px; }
+
     .muted { color: var(--muted); }
-
-    .item .row .btn { flex: 0 0 auto }
-    .toast { position: fixed; right: 20px; bottom: 20px; padding: 10px 14px; border-radius: 12px; border:1px solid var(--border); background: var(--surface); color: var(--text); box-shadow: var(--shadow); opacity: 0; transform: translateY(10px); transition: .25s ease; }
+    .toast { 
+      position: fixed; 
+      right: 24px; 
+      bottom: 24px; 
+      padding: 16px 20px; 
+      border-radius: 12px; 
+      border: 1px solid var(--border-bright); 
+      background: var(--surface); 
+      color: var(--text-bright); 
+      box-shadow: var(--shadow-lg); 
+      opacity: 0; 
+      transform: translateY(20px); 
+      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
+      backdrop-filter: blur(20px);
+    }
     .toast.show { opacity: 1; transform: translateY(0); }
 
-    .empty { display:flex; align-items:center; gap:12px; padding: 14px; border:1px dashed var(--border); border-radius: 12px; background: rgba(255,255,255,.02); }
-    .skeleton { position: relative; overflow: hidden; background: rgba(255,255,255,.06); }
-    .skeleton:after { content:""; position:absolute; inset:0; transform: translateX(-100%); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.15), rgba(255,255,255,0)); animation: shimmer 1.5s infinite; }
+    .empty { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      gap: 16px; 
+      padding: 48px 24px; 
+      border: 2px dashed var(--border); 
+      border-radius: 16px; 
+      background: var(--surface-hover);
+      text-align: center;
+    }
+    .empty-icon { font-size: 48px; opacity: 0.5; }
+    .empty-title { font-size: 18px; font-weight: 600; color: var(--text-bright); margin: 0; }
+    .empty-text { color: var(--muted); margin: 0; }
+
+    .skeleton { 
+      position: relative; 
+      overflow: hidden; 
+      background: var(--surface-hover);
+      border-radius: 16px;
+    }
+    .skeleton::after { 
+      content: ""; 
+      position: absolute; 
+      inset: 0; 
+      transform: translateX(-100%); 
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent); 
+      animation: shimmer 2s infinite; 
+    }
     @keyframes shimmer { 100% { transform: translateX(100%); } }
 
-    footer { margin-top: 38px; padding: 16px; text-align:center; color: var(--muted); }
+    footer { 
+      margin-top: 80px; 
+      padding: 32px; 
+      text-align: center; 
+      color: var(--muted); 
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--primary-bright); text-decoration: none; font-weight: 500; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .container { padding: 20px 16px 60px; }
+      .hero { padding: 24px 20px; }
+      .hero-header { flex-direction: column; }
+      .actions { flex-wrap: wrap; }
+      .grid { grid-template-columns: 1fr; }
+      .row { flex-direction: column; }
+      .input, select.input { min-width: unset; }
+    }
   </style>
 </head>
 <body>
   <div class="container" id="app">
     <header class="hero">
-      <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap">
-        <div style="flex:1 1 auto">
+      <div class="hero-header">
+        <div class="hero-content">
           <h1>Igreja Oliveira Assets</h1>
           <p>Biblioteca pública de imagens publicada via GitHub Pages com CDN e HTTPS.</p>
         </div>
         <div class="actions">
-          <button id="themeToggle" class="btn" type="button" title="Alternar tema"> <span id="themeLabel">Tema</span></button>
-          <a class="btn primary" href="https://github.com/jonh-dev/igreja-oliveira-assets/tree/main/assets/images" target="_blank" rel="noopener">Abrir no GitHub</a>
+          <button id="themeToggle" class="btn" type="button" title="Alternar tema">
+            <span>🌗</span>
+            <span id="themeLabel">Tema</span>
+          </button>
+          <a class="btn primary" href="https://github.com/jonh-dev/igreja-oliveira-assets/tree/main/assets/images" target="_blank" rel="noopener">
+            <span>📂</span>
+            Abrir no GitHub
+          </a>
         </div>
       </div>
       <nav class="toolbar">
-        <a class="chip" href="#logos">Logos</a>
-        <a class="chip" href="#email">Email/Social</a>
-        <a class="chip" href="#gerador">Gerador de URL</a>
+        <a class="chip" href="#logos">
+          <span>🏛️</span>
+          Logos
+        </a>
+        <a class="chip" href="#email">
+          <span>📧</span>
+          Email/Social
+        </a>
+        <a class="chip" href="#gerador">
+          <span>🔗</span>
+          Gerador de URL
+        </a>
       </nav>
     </header>
 
     <section class="section" id="gerador">
-      <h2>Gerador de URL Pública</h2>
-      <div class="card generator">
-        <div class="row">
+      <div class="section-header">
+        <h2>🔗 Gerador de URL Pública</h2>
+      </div>
+      <div class="card">
+        <div class="generator">
+          <div class="generator-grid">
+            <div class="input-group">
+              <label class="input-label" for="folder">Pasta de origem</label>
           <select id="folder" class="input" aria-label="Pasta">
-            <option value="assets/images/logos">assets/images/logos</option>
-            <option value="assets/images/email/social-icons">assets/images/email/social-icons</option>
+                <option value="assets/images/logos">📁 assets/images/logos</option>
+                <option value="assets/images/email/social-icons">📁 assets/images/email/social-icons</option>
           </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="filename">Nome do arquivo</label>
           <input id="filename" class="input" placeholder="ex.: logo-no-background.png" aria-label="Nome do arquivo" />
         </div>
+            <div class="input-group">
+              <label class="input-label" for="resultUrl">URL pública gerada</label>
         <div class="row">
-          <input id="resultUrl" class="input" readonly aria-label="URL pública" />
-          <a id="openUrl" class="btn" target="_blank" rel="noopener">Abrir</a>
-          <button id="copyUrl" class="btn" type="button">Copiar</button>
-          <button id="copyImgTag" class="btn" type="button" title="Copiar tag &lt;img&gt;">Copiar &lt;img/&gt;</button>
-          <button id="refresh" class="btn" type="button" title="Recarregar lista">Recarregar</button>
+                <input id="resultUrl" class="input" readonly aria-label="URL pública" placeholder="A URL aparecerá aqui..." />
+                <a id="openUrl" class="btn" target="_blank" rel="noopener">
+                  <span>🔗</span>
+                  Abrir
+                </a>
+                <button id="copyUrl" class="btn" type="button">
+                  <span>📋</span>
+                  Copiar
+                </button>
+                <button id="copyImgTag" class="btn" type="button" title="Copiar tag HTML">
+                  <span>🏷️</span>
+                  HTML
+                </button>
+                <button id="refresh" class="btn" type="button" title="Recarregar lista de arquivos">
+                  <span>🔄</span>
+                  Atualizar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="muted" style="margin-top: 16px; font-size: 14px;">
+            💡 <strong>Dica:</strong> Nomes são case-sensitive. Consulte a seção Logos abaixo para ver exemplos válidos.
+          </div>
         </div>
       </div>
-      <p class="muted" style="margin:8px 2px">Dica: nomes são case-sensitive. Veja a seção Logos para exemplos válidos.</p>
     </section>
 
     <section class="section" id="logos">
-      <h2>Logos</h2>
+      <div class="section-header">
+        <h2>🏛️ Logos</h2>
+      </div>
       <div class="grid" id="logosGrid">
-        <div class="item skeleton" style="height:220px"></div>
-        <div class="item skeleton" style="height:220px"></div>
-        <div class="item skeleton" style="height:220px"></div>
+        <div class="item skeleton" style="height:280px"></div>
+        <div class="item skeleton" style="height:280px"></div>
+        <div class="item skeleton" style="height:280px"></div>
       </div>
     </section>
 
     <section class="section" id="email">
-      <h2>Email / Social Icons</h2>
-      <div id="emailGrid" class="grid">
-        <div class="item skeleton" style="height:180px"></div>
-        <div class="item skeleton" style="height:180px"></div>
+      <div class="section-header">
+        <h2>📧 Email / Social Icons</h2>
       </div>
-      <div id="emailEmpty" class="empty" style="display:none">Nenhuma imagem encontrada ainda em <code>assets/images/email/social-icons</code>. Publique arquivos e recarregue.</div>
+      <div id="emailGrid" class="grid">
+        <div class="item skeleton" style="height:240px"></div>
+        <div class="item skeleton" style="height:240px"></div>
+      </div>
+      <div id="emailEmpty" class="empty" style="display:none">
+        <div class="empty-icon">📂</div>
+        <h3 class="empty-title">Nenhuma imagem encontrada</h3>
+        <p class="empty-text">Adicione arquivos em <code>assets/images/email/social-icons</code> e clique em "Atualizar".</p>
+      </div>
     </section>
 
     <footer>
-      Publicado em <a href="https://github.com/jonh-dev/igreja-oliveira-assets" target="_blank" rel="noopener" style="color:var(--primary)">GitHub Pages</a>
+      Publicado com ❤️ no <a href="https://github.com/jonh-dev/igreja-oliveira-assets" target="_blank" rel="noopener">GitHub Pages</a>
     </footer>
   </div>
 
@@ -162,32 +476,73 @@
 
       function createItem(path) {
         const urlPublica = pathToPublicUrl(path);
+        const filename = path.split('/').pop();
         const container = document.createElement('div');
         container.className = 'item';
 
         const img = document.createElement('img');
         img.className = 'thumb';
-        img.alt = path.split('/').pop();
+        img.alt = filename;
         img.src = `./${path}`;
-        img.onerror = () => { img.replaceWith(Object.assign(document.createElement('div'), { className: 'muted', textContent: 'Prévia indisponível (arquivo ainda não publicado ou nome incorreto).'})); };
+        img.onerror = () => { 
+          img.replaceWith(Object.assign(document.createElement('div'), { 
+            className: 'muted', 
+            textContent: 'Prévia indisponível',
+            style: 'padding: 40px; text-align: center; border: 2px dashed var(--border); border-radius: 12px; background: var(--surface-hover);'
+          })); 
+        };
 
         const title = document.createElement('h3');
-        title.style.margin = '0';
-        title.style.fontSize = '14px';
-        title.textContent = img.alt;
+        title.className = 'item-title';
+        title.textContent = filename;
+
+        const actions = document.createElement('div');
+        actions.className = 'item-actions';
+
+        const urlDiv = document.createElement('div');
+        urlDiv.className = 'item-url';
+        urlDiv.textContent = urlPublica;
 
         const row = document.createElement('div');
         row.className = 'row';
-        const input = document.createElement('input');
-        input.className = 'input'; input.readOnly = true; input.value = urlPublica; input.setAttribute('aria-label','URL pública');
-        const openBtn = Object.assign(document.createElement('a'), { className: 'btn', href: urlPublica, textContent: 'Abrir', target: '_blank', rel: 'noopener' });
-        const copyBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar' });
-        copyBtn.onclick = async () => { try { await navigator.clipboard.writeText(urlPublica); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
-        const copyImgBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar <img/>' });
-        copyImgBtn.onclick = async () => { try { await navigator.clipboard.writeText(`<img src="${urlPublica}" alt="${img.alt}" />`); showToast('Tag <img> copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+        
+        const openBtn = Object.assign(document.createElement('a'), { 
+          className: 'btn', 
+          href: urlPublica, 
+          target: '_blank', 
+          rel: 'noopener'
+        });
+        openBtn.innerHTML = '<span>🔗</span>Abrir';
+        
+        const copyBtn = Object.assign(document.createElement('button'), { 
+          className: 'btn'
+        });
+        copyBtn.innerHTML = '<span>📋</span>Copiar';
+        copyBtn.onclick = async () => { 
+          try { 
+            await navigator.clipboard.writeText(urlPublica); 
+            showToast('✅ URL copiada!'); 
+          } catch(e) { 
+            showToast('❌ Falha ao copiar'); 
+          } 
+        };
+        
+        const copyImgBtn = Object.assign(document.createElement('button'), { 
+          className: 'btn'
+        });
+        copyImgBtn.innerHTML = '<span>🏷️</span>HTML';
+        copyImgBtn.onclick = async () => { 
+          try { 
+            await navigator.clipboard.writeText(`<img src="${urlPublica}" alt="${filename}" />`); 
+            showToast('✅ Tag HTML copiada!'); 
+          } catch(e) { 
+            showToast('❌ Falha ao copiar'); 
+          } 
+        };
 
-        row.append(input, openBtn, copyBtn, copyImgBtn);
-        container.append(img, title, row);
+        row.append(openBtn, copyBtn, copyImgBtn);
+        actions.append(urlDiv, row);
+        container.append(img, title, actions);
         return container;
       }
 
@@ -235,13 +590,25 @@
       function updateUrl() {
         const folder = document.getElementById('folder').value;
         const filename = (document.getElementById('filename').value || '').trim();
+        if (!filename) {
+          document.getElementById('resultUrl').value = '';
+          document.getElementById('openUrl').href = '#';
+          return;
+        }
         const path = `${folder}/${filename}`.replace(/\s+/g, '%20');
         const url = pathToPublicUrl(path);
         const resultEl = document.getElementById('resultUrl');
         resultEl.value = url;
         const openEl = document.getElementById('openUrl');
-        openEl.href = url; openEl.textContent = 'Abrir (URL pública)';
-        document.getElementById('copyImgTag').onclick = async () => { try { await navigator.clipboard.writeText(`<img src="${url}" alt="${filename || 'asset'}" />`); showToast('Tag <img> copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+        openEl.href = url;
+        document.getElementById('copyImgTag').onclick = async () => { 
+          try { 
+            await navigator.clipboard.writeText(`<img src="${url}" alt="${filename}" />`); 
+            showToast('✅ Tag HTML copiada!'); 
+          } catch(e) { 
+            showToast('❌ Falha ao copiar'); 
+          } 
+        };
       }
 
       function applyThemeLabel(theme) {
@@ -268,10 +635,23 @@
         applyThemeLabel(next);
       };
 
-      document.getElementById('copyUrl').onclick = async () => { if (!document.getElementById('resultUrl').value) updateUrl(); try { await navigator.clipboard.writeText(document.getElementById('resultUrl').value); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+      document.getElementById('copyUrl').onclick = async () => { 
+        if (!document.getElementById('resultUrl').value) updateUrl(); 
+        try { 
+          await navigator.clipboard.writeText(document.getElementById('resultUrl').value); 
+          showToast('✅ URL copiada!'); 
+        } catch(e) { 
+          showToast('❌ Falha ao copiar'); 
+        } 
+      };
       document.getElementById('openUrl').onclick = () => { if (!document.getElementById('resultUrl').value) updateUrl(); };
+      document.getElementById('filename').addEventListener('input', updateUrl);
       document.getElementById('filename').addEventListener('keydown', (e) => { if (e.key === 'Enter') updateUrl(); });
-      document.getElementById('refresh').onclick = () => { ['assets/images/logos','assets/images/email/social-icons'].forEach(k => localStorage.removeItem('cache_'+k)); bootstrap(); };
+      document.getElementById('refresh').onclick = () => { 
+        ['assets/images/logos','assets/images/email/social-icons'].forEach(k => localStorage.removeItem('cache_'+k)); 
+        showToast('🔄 Atualizando lista...'); 
+        bootstrap(); 
+      };
       document.getElementById('copyImgTag').onclick = () => updateUrl();
       document.getElementById('folder').addEventListener('change', updateUrl);
 
