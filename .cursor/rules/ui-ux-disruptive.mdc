@@ -1,0 +1,12 @@
+﻿---
+globs: *.html
+---
+# UI/UX Disruptivo (HTML)
+
+- Use design moderno com variáveis CSS, suporte a dark/light e tipografia forte.
+- Layouts responsivos, cartões com sombras suaves, bordas arredondadas e estados de foco/hover visíveis.
+- Controles acessíveis (aria-*, contraste AA, teclas de atalho quando fizer sentido).
+- Microinterações sutis: transições curtas, toasts para feedback, cópia de URL com confirmação.
+- Evite bibliotecas externas; preferir vanilla CSS/JS para páginas estáticas de assets.
+- Para listas de imagens: grid fluido, prévia com `object-fit: contain`, botões de Ação (Abrir, Copiar URL, Copiar <img>). 
+- Mantenha o conteúdo em PT-BR, claro e direto.

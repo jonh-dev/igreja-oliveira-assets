@@ -4,83 +4,142 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Igreja Oliveira Assets</title>
+  <meta name="description" content="Biblioteca de imagens públicas da Igreja Oliveira publicada via GitHub Pages" />
   <style>
-    :root { --border: #e5e7eb; --muted: #6b7280; --bg: #f9fafb; --primary: #111827; --accent: #2563eb; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 32px; color: var(--primary); }
-    .toolbar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: white; color: var(--primary); text-decoration: none; cursor: pointer; }
-    .btn:hover { border-color: var(--accent); color: var(--accent); }
-    .card { border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    :root {
+      --bg: #0b1220;
+      --surface: #0f172a;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --border: #1f2a44;
+      --primary: #60a5fa;
+      --primary-contrast: #0b1220;
+      --accent: #a78bfa;
+      --success: #34d399;
+      --danger: #f87171;
+      --shadow: 0 10px 30px rgba(2,6,23,.35);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f8fafc; --surface:#ffffff; --muted:#64748b; --text:#0f172a; --border:#e2e8f0; --primary:#2563eb; --primary-contrast:#ffffff; --accent:#7c3aed; --shadow: 0 8px 24px rgba(2,6,23,.08); }
+    }
+    [data-theme="light"] { --bg:#f8fafc; --surface:#ffffff; --muted:#64748b; --text:#0f172a; --border:#e2e8f0; --primary:#2563eb; --primary-contrast:#ffffff; --accent:#7c3aed; --shadow: 0 8px 24px rgba(2,6,23,.08); }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0; background: radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.15), transparent 60%),
+                               radial-gradient(900px 500px at 110% 10%, rgba(167,139,250,.12), transparent 60%),
+                               var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.5;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    .hero { position: relative; padding: 28px; border: 1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)), var(--surface); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
+    .hero:before { content: ""; position: absolute; inset: -1px; background: radial-gradient(600px 160px at 0% -10%, rgba(96,165,250,.12), transparent 60%), radial-gradient(600px 160px at 100% -20%, rgba(167,139,250,.10), transparent 60%); pointer-events: none; }
+    .hero h1 { margin: 0; letter-spacing: -0.02em; font-weight: 750; font-size: clamp(26px, 2.8vw, 40px); }
+    .hero p { margin: 8px 0 0; color: var(--muted); }
+
+    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,.02); text-decoration: none; }
+    .chip:hover { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.15) inset; }
+
+    .actions { display:flex; align-items:center; gap: 10px; margin-left:auto }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; text-decoration: none; }
+    .btn.primary { background: linear-gradient(180deg, rgba(96,165,250,.2), rgba(96,165,250,.05)); border-color: rgba(96,165,250,.35); }
+    .btn.primary:hover { filter: brightness(1.1); }
+
+    .section { margin-top: 28px; }
+    h2 { margin: 0 0 12px; font-size: clamp(18px, 1.8vw, 24px); letter-spacing: -0.01em; }
+    .card { border: 1px solid var(--border); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+
+    .generator { padding: 18px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+    .row { display:flex; gap:10px; }
+    .input, select.input { flex:1; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,.02); color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .item { display:flex; flex-direction:column; gap:10px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); }
+    .thumb { display:block; width:100%; max-height:180px; object-fit: contain; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px dashed var(--border); padding: 8px; }
     .muted { color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .item { border: 1px solid var(--border); border-radius: 12px; padding: 12px; background: white; display:flex; flex-direction: column; gap: 10px; }
-    .thumb { display: block; width: 100%; max-height: 160px; object-fit: contain; background: #fff; border: 1px dashed var(--border); border-radius: 8px; padding: 6px; }
-    .row { display: flex; gap: 8px; align-items: center; }
-    .row input { flex: 1; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12px; }
-    h1 { margin: 0 0 8px 0; }
-    h2 { margin: 24px 0 12px 0; }
-    h3 { margin: 4px 0 8px 0; }
-    pre { background: var(--bg); padding: 10px; border-radius: 8px; overflow: auto; }
-    .empty { padding: 12px; border: 1px dashed var(--border); border-radius: 8px; background: var(--bg); }
-    .section { margin-top: 24px; }
-    .note { font-size: 12px; }
+
+    .item .row .btn { flex: 0 0 auto }
+    .toast { position: fixed; right: 20px; bottom: 20px; padding: 10px 14px; border-radius: 12px; border:1px solid var(--border); background: var(--surface); color: var(--text); box-shadow: var(--shadow); opacity: 0; transform: translateY(10px); transition: .25s ease; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    footer { margin-top: 38px; padding: 16px; text-align:center; color: var(--muted); }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Igreja Oliveira Assets</h1>
-    <p class="muted">Arquivos estáticos publicados via GitHub Pages.</p>
+  <div class="container" id="app">
+    <header class="hero">
+      <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap">
+        <div style="flex:1 1 auto">
+          <h1>Igreja Oliveira Assets</h1>
+          <p>Biblioteca pública de imagens publicada via GitHub Pages com CDN e HTTPS.</p>
+        </div>
+        <div class="actions">
+          <button id="themeToggle" class="btn" type="button" title="Alternar tema"> <span id="themeLabel">Tema</span></button>
+          <a class="btn primary" href="https://github.com/jonh-dev/igreja-oliveira-assets/tree/main/assets/images" target="_blank" rel="noopener">Abrir no GitHub</a>
+        </div>
+      </div>
+      <nav class="toolbar">
+        <a class="chip" href="#logos">Logos</a>
+        <a class="chip" href="#email">Email/Social</a>
+        <a class="chip" href="#gerador">Gerador de URL</a>
+      </nav>
+    </header>
 
-    <div class="toolbar">
-      <a class="btn" href="#logos">Ir para Logos</a>
-      <a class="btn" href="#email">Ir para Email/Social Icons</a>
-      <a class="btn" href="https://github.com/jonh-dev/igreja-oliveira-assets/tree/main/assets/images" target="_blank" rel="noopener">Abrir no GitHub</a>
-    </div>
-
-    <div class="section">
+    <section class="section" id="gerador">
       <h2>Gerador de URL Pública</h2>
-      <p class="muted note">Selecione a pasta e informe o nome do arquivo para obter a URL pública exata.</p>
-      <div class="row" style="margin-bottom:8px">
-        <select id="folder" class="btn" style="padding:6px 8px">
-          <option value="assets/images/logos">assets/images/logos</option>
-          <option value="assets/images/email/social-icons">assets/images/email/social-icons</option>
-        </select>
-        <input id="filename" placeholder="ex.: logo-no-background.png" />
-        <button id="build" class="btn" type="button">Gerar</button>
+      <div class="card generator">
+        <div class="row">
+          <select id="folder" class="input" aria-label="Pasta">
+            <option value="assets/images/logos">assets/images/logos</option>
+            <option value="assets/images/email/social-icons">assets/images/email/social-icons</option>
+          </select>
+          <input id="filename" class="input" placeholder="ex.: logo-no-background.png" aria-label="Nome do arquivo" />
+        </div>
+        <div class="row">
+          <input id="resultUrl" class="input" readonly aria-label="URL pública" />
+          <a id="openUrl" class="btn" target="_blank" rel="noopener">Abrir</a>
+          <button id="copyUrl" class="btn" type="button">Copiar</button>
+          <button id="copyImgTag" class="btn" type="button" title="Copiar tag <img>">Copiar <img/></button>
+        </div>
       </div>
-      <div class="row">
-        <input id="resultUrl" readonly />
-        <a id="openUrl" class="btn" target="_blank" rel="noopener">Abrir</a>
-        <button id="copyUrl" class="btn" type="button">Copiar</button>
-      </div>
-    </div>
+      <p class="muted" style="margin:8px 2px">Dica: nomes são case-sensitive. Veja a seção Logos para exemplos válidos.</p>
+    </section>
 
-    <div class="section" id="logos">
+    <section class="section" id="logos">
       <h2>Logos</h2>
       <div class="grid" id="logosGrid"></div>
-    </div>
+    </section>
 
-    <div class="section" id="email">
+    <section class="section" id="email">
       <h2>Email / Social Icons</h2>
       <div id="emailGrid" class="grid"></div>
-      <p id="emailEmpty" class="muted empty" style="display:none">Nenhuma imagem encontrada ainda em <code>assets/images/email/social-icons</code>.</p>
-    </div>
+      <p id="emailEmpty" class="muted" style="display:none; border:1px dashed var(--border); padding:10px; border-radius:10px">Nenhuma imagem encontrada ainda em <code>assets/images/email/social-icons</code>.</p>
+    </section>
+
+    <footer>
+      Publicado em <a href="https://github.com/jonh-dev/igreja-oliveira-assets" target="_blank" rel="noopener" style="color:var(--primary)">GitHub Pages</a>
+    </footer>
   </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
     const BASE = 'https://jonh-dev.github.io/igreja-oliveira-assets';
 
-    // Lista de arquivos existentes no repositório neste momento
-    const logos = [
-      'logo-no-background.png',
-      'logo-withe-no-background.png'
-    ];
-    const emailIcons = [
-      // Adicione aqui quando subir ícones, ex.: 'instagram.svg', 'youtube.svg'
-    ];
+    const logos = [ 'logo-no-background.png', 'logo-withe-no-background.png' ];
+    const emailIcons = [ /* ex.: 'instagram.svg', 'youtube.svg' */ ];
 
-    function pathToPublicUrl(path) {
-      return `${BASE}/${path}`.replace(/\\/g, '/');
+    function pathToPublicUrl(path) { return `${BASE}/${path}`.replace(/\\/g, '/'); }
+
+    function showToast(text) {
+      const el = document.getElementById('toast');
+      el.textContent = text; el.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => el.classList.remove('show'), 1600);
     }
 
     function createItem(path) {
@@ -92,58 +151,68 @@
       img.className = 'thumb';
       img.alt = path.split('/').pop();
       img.src = `./${path}`;
-      img.onerror = () => {
-        img.replaceWith(Object.assign(document.createElement('div'), { className: 'empty muted', textContent: 'Prévia indisponível (arquivo ainda não publicado ou nome incorreto).'}));
-      };
+      img.onerror = () => { img.replaceWith(Object.assign(document.createElement('div'), { className: 'muted', textContent: 'Prévia indisponível (arquivo ainda não publicado ou nome incorreto).'})); };
 
       const title = document.createElement('h3');
+      title.style.margin = '0';
+      title.style.fontSize = '14px';
       title.textContent = img.alt;
 
       const row = document.createElement('div');
       row.className = 'row';
       const input = document.createElement('input');
-      input.readOnly = true;
-      input.value = urlPublica;
-      const openBtn = Object.assign(document.createElement('a'), { className: 'btn', href: urlPublica, textContent: 'Abrir (URL pública)', target: '_blank', rel: 'noopener' });
-      const copyBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar URL' });
-      copyBtn.onclick = async () => { try { await navigator.clipboard.writeText(urlPublica); copyBtn.textContent = 'Copiado!'; setTimeout(() => copyBtn.textContent = 'Copiar URL', 1200); } catch(e) { alert('Falha ao copiar'); } };
+      input.className = 'input'; input.readOnly = true; input.value = urlPublica; input.ariaLabel = 'URL pública';
+      const openBtn = Object.assign(document.createElement('a'), { className: 'btn', href: urlPublica, textContent: 'Abrir', target: '_blank', rel: 'noopener' });
+      const copyBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar' });
+      copyBtn.onclick = async () => { try { await navigator.clipboard.writeText(urlPublica); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+      const copyImgBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar <img/>' });
+      copyImgBtn.onclick = async () => { try { await navigator.clipboard.writeText(`<img src="${urlPublica}" alt="${img.alt}" />`); showToast('Tag <img> copiada'); } catch(e) { showToast('Falha ao copiar'); } };
 
-      row.append(input, openBtn, copyBtn);
+      row.append(input, openBtn, copyBtn, copyImgBtn);
       container.append(img, title, row);
       return container;
     }
 
     function renderSection(gridId, emptyId, files, baseFolder) {
       const grid = document.getElementById(gridId);
-      if (!files.length) {
-        if (emptyId) document.getElementById(emptyId).style.display = 'block';
-        return;
-      }
-      files.forEach(file => {
-        grid.appendChild(createItem(`${baseFolder}/${file}`));
-      });
+      grid.innerHTML = '';
+      if (!files.length) { if (emptyId) document.getElementById(emptyId).style.display = 'block'; return; }
+      files.forEach(file => grid.appendChild(createItem(`${baseFolder}/${file}`)));
     }
+
+    function updateUrl() {
+      const folder = document.getElementById('folder').value;
+      const filename = (document.getElementById('filename').value || '').trim();
+      const path = `${folder}/${filename}`.replace(/\s+/g, '%20');
+      const url = pathToPublicUrl(path);
+      const resultEl = document.getElementById('resultUrl');
+      resultEl.value = url;
+      const openEl = document.getElementById('openUrl');
+      openEl.href = url; openEl.textContent = 'Abrir (URL pública)';
+      document.getElementById('copyImgTag').onclick = async () => { try { await navigator.clipboard.writeText(`<img src="${url}" alt="${filename || 'asset'}" />`); showToast('Tag <img> copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+    }
+
+    function initTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') document.documentElement.setAttribute('data-theme','light');
+      else document.documentElement.removeAttribute('data-theme');
+      document.getElementById('themeLabel').textContent = (saved === 'light') ? 'Claro' : 'Escuro';
+    }
+
+    document.getElementById('themeToggle').onclick = () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) { document.documentElement.removeAttribute('data-theme'); localStorage.removeItem('theme'); }
+      else { document.documentElement.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); }
+      initTheme();
+    };
+
+    document.getElementById('copyUrl').onclick = async () => { if (!document.getElementById('resultUrl').value) updateUrl(); try { await navigator.clipboard.writeText(document.getElementById('resultUrl').value); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+    document.getElementById('openUrl').onclick = () => { if (!document.getElementById('resultUrl').value) updateUrl(); };
+    document.getElementById('filename').addEventListener('keydown', (e) => { if (e.key === 'Enter') updateUrl(); });
 
     renderSection('logosGrid', null, logos, 'assets/images/logos');
     renderSection('emailGrid', 'emailEmpty', emailIcons, 'assets/images/email/social-icons');
-
-    const folderEl = document.getElementById('folder');
-    const filenameEl = document.getElementById('filename');
-    const resultEl = document.getElementById('resultUrl');
-    const openEl = document.getElementById('openUrl');
-    const buildEl = document.getElementById('build');
-    const copyEl = document.getElementById('copyUrl');
-
-    function updateUrl() {
-      const path = `${folderEl.value}/${(filenameEl.value || '').trim()}`.replace(/\s+/g, '%20');
-      const url = pathToPublicUrl(path);
-      resultEl.value = url;
-      openEl.href = url;
-      openEl.textContent = 'Abrir (URL pública)';
-    }
-
-    buildEl.onclick = updateUrl;
-    copyEl.onclick = async () => { if (!resultEl.value) updateUrl(); try { await navigator.clipboard.writeText(resultEl.value); copyEl.textContent = 'Copiado!'; setTimeout(() => copyEl.textContent = 'Copiar', 1200); } catch(e) { alert('Falha ao copiar'); } };
+    initTheme();
   </script>
 </body>
 </html>
