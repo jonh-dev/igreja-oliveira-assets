@@ -7,6 +7,18 @@
   <meta name="description" content="Biblioteca de imagens públicas da Igreja Oliveira publicada via GitHub Pages" />
   <style>
     :root {
+      /* LIGHT (default) */
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --muted: #64748b;
+      --text: #0f172a;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-contrast: #ffffff;
+      --accent: #7c3aed;
+      --shadow: 0 8px 24px rgba(2,6,23,.08);
+    }
+    [data-theme="dark"] {
       --bg: #0b1220;
       --surface: #0f172a;
       --muted: #94a3b8;
@@ -15,23 +27,25 @@
       --primary: #60a5fa;
       --primary-contrast: #0b1220;
       --accent: #a78bfa;
-      --success: #34d399;
-      --danger: #f87171;
       --shadow: 0 10px 30px rgba(2,6,23,.35);
     }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#f8fafc; --surface:#ffffff; --muted:#64748b; --text:#0f172a; --border:#e2e8f0; --primary:#2563eb; --primary-contrast:#ffffff; --accent:#7c3aed; --shadow: 0 8px 24px rgba(2,6,23,.08); }
+    @media (prefers-color-scheme: dark) {
+      :root { color-scheme: dark; }
+      :root:not([data-theme]) { /* se não houver preferencia salva, siga o sistema */
+        --bg: #0b1220; --surface: #0f172a; --muted:#94a3b8; --text:#e2e8f0; --border:#1f2a44; --primary:#60a5fa; --primary-contrast:#0b1220; --accent:#a78bfa; --shadow: 0 10px 30px rgba(2,6,23,.35);
+      }
     }
-    [data-theme="light"] { --bg:#f8fafc; --surface:#ffffff; --muted:#64748b; --text:#0f172a; --border:#e2e8f0; --primary:#2563eb; --primary-contrast:#ffffff; --accent:#7c3aed; --shadow: 0 8px 24px rgba(2,6,23,.08); }
 
     html, body { height: 100%; }
     body {
-      margin: 0; background: radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.15), transparent 60%),
-                               radial-gradient(900px 500px at 110% 10%, rgba(167,139,250,.12), transparent 60%),
-                               var(--bg);
+      margin: 0; background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.12), transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, rgba(167,139,250,.10), transparent 60%),
+        var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       line-height: 1.5;
+      transition: background-color .25s ease, color .25s ease;
     }
     .container { max-width: 1120px; margin: 0 auto; padding: 28px 20px 60px; }
 
@@ -103,7 +117,7 @@
           <input id="resultUrl" class="input" readonly aria-label="URL pública" />
           <a id="openUrl" class="btn" target="_blank" rel="noopener">Abrir</a>
           <button id="copyUrl" class="btn" type="button">Copiar</button>
-          <button id="copyImgTag" class="btn" type="button" title="Copiar tag <img>">Copiar <img/></button>
+          <button id="copyImgTag" class="btn" type="button" title="Copiar tag &lt;img&gt;">Copiar &lt;img/&gt;</button>
         </div>
       </div>
       <p class="muted" style="margin:8px 2px">Dica: nomes são case-sensitive. Veja a seção Logos para exemplos válidos.</p>
@@ -128,91 +142,104 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const BASE = 'https://jonh-dev.github.io/igreja-oliveira-assets';
+    document.addEventListener('DOMContentLoaded', () => {
+      const BASE = 'https://jonh-dev.github.io/igreja-oliveira-assets';
 
-    const logos = [ 'logo-no-background.png', 'logo-withe-no-background.png' ];
-    const emailIcons = [ /* ex.: 'instagram.svg', 'youtube.svg' */ ];
+      const logos = [ 'logo-no-background.png', 'logo-withe-no-background.png' ];
+      const emailIcons = [ /* ex.: 'instagram.svg', 'youtube.svg' */ ];
 
-    function pathToPublicUrl(path) { return `${BASE}/${path}`.replace(/\\/g, '/'); }
+      function pathToPublicUrl(path) { return `${BASE}/${path}`.replace(/\\/g, '/'); }
 
-    function showToast(text) {
-      const el = document.getElementById('toast');
-      el.textContent = text; el.classList.add('show');
-      clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => el.classList.remove('show'), 1600);
-    }
+      function showToast(text) {
+        const el = document.getElementById('toast');
+        el.textContent = text; el.classList.add('show');
+        clearTimeout(window.__toastTimer);
+        window.__toastTimer = setTimeout(() => el.classList.remove('show'), 1600);
+      }
 
-    function createItem(path) {
-      const urlPublica = pathToPublicUrl(path);
-      const container = document.createElement('div');
-      container.className = 'item';
+      function createItem(path) {
+        const urlPublica = pathToPublicUrl(path);
+        const container = document.createElement('div');
+        container.className = 'item';
 
-      const img = document.createElement('img');
-      img.className = 'thumb';
-      img.alt = path.split('/').pop();
-      img.src = `./${path}`;
-      img.onerror = () => { img.replaceWith(Object.assign(document.createElement('div'), { className: 'muted', textContent: 'Prévia indisponível (arquivo ainda não publicado ou nome incorreto).'})); };
+        const img = document.createElement('img');
+        img.className = 'thumb';
+        img.alt = path.split('/').pop();
+        img.src = `./${path}`;
+        img.onerror = () => { img.replaceWith(Object.assign(document.createElement('div'), { className: 'muted', textContent: 'Prévia indisponível (arquivo ainda não publicado ou nome incorreto).'})); };
 
-      const title = document.createElement('h3');
-      title.style.margin = '0';
-      title.style.fontSize = '14px';
-      title.textContent = img.alt;
+        const title = document.createElement('h3');
+        title.style.margin = '0';
+        title.style.fontSize = '14px';
+        title.textContent = img.alt;
 
-      const row = document.createElement('div');
-      row.className = 'row';
-      const input = document.createElement('input');
-      input.className = 'input'; input.readOnly = true; input.value = urlPublica; input.ariaLabel = 'URL pública';
-      const openBtn = Object.assign(document.createElement('a'), { className: 'btn', href: urlPublica, textContent: 'Abrir', target: '_blank', rel: 'noopener' });
-      const copyBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar' });
-      copyBtn.onclick = async () => { try { await navigator.clipboard.writeText(urlPublica); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
-      const copyImgBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar <img/>' });
-      copyImgBtn.onclick = async () => { try { await navigator.clipboard.writeText(`<img src="${urlPublica}" alt="${img.alt}" />`); showToast('Tag <img> copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+        const row = document.createElement('div');
+        row.className = 'row';
+        const input = document.createElement('input');
+        input.className = 'input'; input.readOnly = true; input.value = urlPublica; input.setAttribute('aria-label','URL pública');
+        const openBtn = Object.assign(document.createElement('a'), { className: 'btn', href: urlPublica, textContent: 'Abrir', target: '_blank', rel: 'noopener' });
+        const copyBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar' });
+        copyBtn.onclick = async () => { try { await navigator.clipboard.writeText(urlPublica); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+        const copyImgBtn = Object.assign(document.createElement('button'), { className: 'btn', textContent: 'Copiar <img/>' });
+        copyImgBtn.onclick = async () => { try { await navigator.clipboard.writeText(`<img src="${urlPublica}" alt="${img.alt}" />`); showToast('Tag <img> copiada'); } catch(e) { showToast('Falha ao copiar'); } };
 
-      row.append(input, openBtn, copyBtn, copyImgBtn);
-      container.append(img, title, row);
-      return container;
-    }
+        row.append(input, openBtn, copyBtn, copyImgBtn);
+        container.append(img, title, row);
+        return container;
+      }
 
-    function renderSection(gridId, emptyId, files, baseFolder) {
-      const grid = document.getElementById(gridId);
-      grid.innerHTML = '';
-      if (!files.length) { if (emptyId) document.getElementById(emptyId).style.display = 'block'; return; }
-      files.forEach(file => grid.appendChild(createItem(`${baseFolder}/${file}`)));
-    }
+      function renderSection(gridId, emptyId, files, baseFolder) {
+        const grid = document.getElementById(gridId);
+        grid.innerHTML = '';
+        if (!files.length) { if (emptyId) document.getElementById(emptyId).style.display = 'block'; return; }
+        files.forEach(file => grid.appendChild(createItem(`${baseFolder}/${file}`)));
+      }
 
-    function updateUrl() {
-      const folder = document.getElementById('folder').value;
-      const filename = (document.getElementById('filename').value || '').trim();
-      const path = `${folder}/${filename}`.replace(/\s+/g, '%20');
-      const url = pathToPublicUrl(path);
-      const resultEl = document.getElementById('resultUrl');
-      resultEl.value = url;
-      const openEl = document.getElementById('openUrl');
-      openEl.href = url; openEl.textContent = 'Abrir (URL pública)';
-      document.getElementById('copyImgTag').onclick = async () => { try { await navigator.clipboard.writeText(`<img src="${url}" alt="${filename || 'asset'}" />`); showToast('Tag <img> copiada'); } catch(e) { showToast('Falha ao copiar'); } };
-    }
+      function updateUrl() {
+        const folder = document.getElementById('folder').value;
+        const filename = (document.getElementById('filename').value || '').trim();
+        const path = `${folder}/${filename}`.replace(/\s+/g, '%20');
+        const url = pathToPublicUrl(path);
+        const resultEl = document.getElementById('resultUrl');
+        resultEl.value = url;
+        const openEl = document.getElementById('openUrl');
+        openEl.href = url; openEl.textContent = 'Abrir (URL pública)';
+        document.getElementById('copyImgTag').onclick = async () => { try { await navigator.clipboard.writeText(`<img src="${url}" alt="${filename || 'asset'}" />`); showToast('Tag <img> copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+      }
 
-    function initTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved === 'light') document.documentElement.setAttribute('data-theme','light');
-      else document.documentElement.removeAttribute('data-theme');
-      document.getElementById('themeLabel').textContent = (saved === 'light') ? 'Claro' : 'Escuro';
-    }
+      function applyThemeLabel(theme) {
+        document.getElementById('themeLabel').textContent = theme === 'dark' ? 'Escuro' : 'Claro';
+      }
 
-    document.getElementById('themeToggle').onclick = () => {
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      if (isLight) { document.documentElement.removeAttribute('data-theme'); localStorage.removeItem('theme'); }
-      else { document.documentElement.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); }
+      function initTheme() {
+        const saved = localStorage.getItem('theme');
+        let theme = saved;
+        if (!theme) {
+          theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        if (theme === 'dark') document.documentElement.setAttribute('data-theme','dark');
+        else document.documentElement.removeAttribute('data-theme');
+        applyThemeLabel(theme);
+      }
+
+      document.getElementById('themeToggle').onclick = () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const next = isDark ? 'light' : 'dark';
+        if (next === 'dark') { document.documentElement.setAttribute('data-theme','dark'); }
+        else { document.documentElement.removeAttribute('data-theme'); }
+        localStorage.setItem('theme', next);
+        applyThemeLabel(next);
+      };
+
+      document.getElementById('copyUrl').onclick = async () => { if (!document.getElementById('resultUrl').value) updateUrl(); try { await navigator.clipboard.writeText(document.getElementById('resultUrl').value); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
+      document.getElementById('openUrl').onclick = () => { if (!document.getElementById('resultUrl').value) updateUrl(); };
+      document.getElementById('filename').addEventListener('keydown', (e) => { if (e.key === 'Enter') updateUrl(); });
+      document.getElementById('build').onclick = updateUrl;
+
+      renderSection('logosGrid', null, logos, 'assets/images/logos');
+      renderSection('emailGrid', 'emailEmpty', emailIcons, 'assets/images/email/social-icons');
       initTheme();
-    };
-
-    document.getElementById('copyUrl').onclick = async () => { if (!document.getElementById('resultUrl').value) updateUrl(); try { await navigator.clipboard.writeText(document.getElementById('resultUrl').value); showToast('URL copiada'); } catch(e) { showToast('Falha ao copiar'); } };
-    document.getElementById('openUrl').onclick = () => { if (!document.getElementById('resultUrl').value) updateUrl(); };
-    document.getElementById('filename').addEventListener('keydown', (e) => { if (e.key === 'Enter') updateUrl(); });
-
-    renderSection('logosGrid', null, logos, 'assets/images/logos');
-    renderSection('emailGrid', 'emailEmpty', emailIcons, 'assets/images/email/social-icons');
-    initTheme();
+    });
   </script>
 </body>
 </html>
