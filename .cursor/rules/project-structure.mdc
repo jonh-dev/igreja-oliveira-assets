@@ -1,0 +1,15 @@
+﻿---
+alwaysApply: true
+---
+# Projeto de Assets (GitHub Pages)
+
+Este repositório hospeda imagens estáticas servidas pelo GitHub Pages a partir da branch `main` na raiz do projeto.
+
+- Estrutura: `assets/images/...`
+- Página de demonstração: `index.html`
+- Documentação: [github-pages-setup.md](mdc:github-pages-setup.md), [README.md](mdc:README.md)
+
+## Publicação
+- Adicione imagens em `assets/images/...`
+- Commit + push em `main`
+- Acesse: `https://jonh-dev.github.io/igreja-oliveira-assets/`

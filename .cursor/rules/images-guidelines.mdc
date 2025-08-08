@@ -1,1 +1,9 @@
-﻿
+﻿---
+globs: assets/**
+---
+# Convenções de Imagens
+
+- Nomes em kebab-case (ex.: `logo-white-no-bg.png`)
+- Otimize as imagens (< 1MB recomendado)
+- Prefira PNG/SVG para logos, JPG para fotos
+- Paths são case-sensitive
